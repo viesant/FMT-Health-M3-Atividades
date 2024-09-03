@@ -1,1 +1,22 @@
-<p>automoveis works!</p>
+<div class="container">
+  <ul>
+    @for (automovel of automoveisList; track automovel.id) {
+    <li class="card-auto" (click)="redirectTo(automovel.id)">
+      <div class="automovel-info">
+        <p>{{ automovel.name }}</p>
+        <p>
+          <img
+            class="img-auto"
+            [src]="automovel.image"
+            alt="{{ automovel.name }}"
+          />
+        </p>
+        <p>Ano: {{ automovel.year | yearAuto }}</p>
+        <p>Tipo: {{ automovel.type }}</p>
+        <p>Preço por dia: R$ {{ automovel.pricePerDay }}</p>
+        <p>Descrição: {{ automovel.description }}</p>
+      </div>
+    </li>
+    }
+  </ul>
+</div>

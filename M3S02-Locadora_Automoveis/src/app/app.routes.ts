@@ -4,11 +4,6 @@ import { AutomoveisDetailsComponent } from './pages/automoveis/automoveis-detail
 
 export const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'automoveis',
-    pathMatch: 'full',
-  },
-  {
     path: 'automoveis',
     children: [
       {
@@ -21,4 +16,6 @@ export const routes: Routes = [
       },
     ],
   },
+  { path: '', redirectTo: '/automoveis', pathMatch: 'full' },
+  { path: '**', redirectTo: '/automoveis' },
 ];
