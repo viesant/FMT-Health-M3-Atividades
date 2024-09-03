@@ -1,1 +1,11 @@
-<p>automoveis-details works!</p>
+<div class="automovelDetails-conteiner">
+  <p>{{ automovel.name }}</p>
+  <p>
+    <img class="img-auto" [src]="automovel.image" alt="{{ automovel.name }}" />
+  </p>
+  <p>Ano: {{ automovel.year | yearAuto }}</p>
+  <p>Tipo: {{ automovel.type }}</p>
+  <p>Preço por dia: R$ {{ automovel.pricePerDay }}</p>
+  <p>Descrição: {{ automovel.description }}</p>
+  <p><button type="button">Alugar</button></p>
+</div>
