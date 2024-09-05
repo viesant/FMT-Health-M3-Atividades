@@ -1,24 +1,54 @@
-.header {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  /* align-items: center; */
-  padding: 10px;
+.header-component {
   background-color: #333;
   color: white;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .title {
-  font-size: 24px;
+  font-size: 1.8em;
+  color: white;
+  text-decoration: none;
   cursor: pointer;
+  margin: 0;
 }
 
 .navbar {
   display: flex;
-  justify-content: center;
+  align-items: center;
 }
 
 .navLink {
+  margin-right: 20px;
+  font-size: 1.2em;
+  color: white;
+  text-decoration: none;
   cursor: pointer;
-  margin-left: 20px;
+}
+
+.navLink:hover {
+  color: #f1c40f;
+}
+
+.favorites-icon {
+  display: flex;
+  align-items: center;
+  font-size: 1.2em;
+  cursor: default;
+  color: #f1c40f;
+}
+
+.favorites-icon span:last-child {
+  margin-left: 5px;
+  font-size: 1.2em;
+  color: white;
 }
