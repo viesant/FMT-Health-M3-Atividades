@@ -18,7 +18,13 @@ export class AutomoveisComponent implements OnInit {
   ngOnInit(): void {
     this.automoveisService.list().subscribe({
       next: (data: any) => {
+        let favoritos = JSON.parse(localStorage.getItem('favoritos') || '[]');
+
         this.automoveisList = data;
+        this.automoveisList.forEach((automovel: any) => {
+          automovel.isFavorito = favoritos.includes(automovel.id);
+        });
+
         console.log(this.automoveisList);
       },
       error: (error) => {

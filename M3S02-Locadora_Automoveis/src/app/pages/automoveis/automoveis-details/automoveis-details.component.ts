@@ -32,4 +32,19 @@ export class AutomoveisDetailsComponent {
       },
     });
   }
+
+  favoritar() {
+    // let favoritosStr = localStorage.getItem('favoritos');
+    // let favoritos = favoritosStr ? JSON.parse(favoritosStr) : [];
+
+    let favoritos = JSON.parse(localStorage.getItem('favoritos') || '[]');
+
+    if (!favoritos.includes(this.automovel.id)) {
+      favoritos.push(this.automovel.id);
+      localStorage.setItem('favoritos', JSON.stringify(favoritos));
+      alert('Paciente favoritado com sucesso!');
+    } else {
+      alert('Este item já está na lista de favoritos.');
+    }
+  }
 }
