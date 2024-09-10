@@ -21,4 +21,8 @@ describe('CalculadoraService', () => {
   it('deve subtrair 2 numeros e retornar a resposta correta', () => {
     expect(service.subtrair(10, 3)).toBe(7);
   });
+
+  it('deve multiplicar 2 numeros e retornar a resposta correta', () => {
+    expect(service.multiplicar(7, 2)).toBe(14);
+  });
 });
