@@ -18,7 +18,7 @@ export class CalculadoraService {
 
   dividir(a: number, b: number): number {
     if (b === 0) {
-      throw new Error('Não é permitida a divisão por 0');
+      throw new Error('Divisão por zero');
     }
     return a / b;
   }
