@@ -8,9 +8,8 @@ describe('CalculadoraComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CalculadoraComponent]
-    })
-    .compileComponents();
+      imports: [CalculadoraComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CalculadoraComponent);
     component = fixture.componentInstance;
@@ -19,5 +18,12 @@ describe('CalculadoraComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('deve adicionar 2 numeros e retornar a resposta correta', () => {
+    component.num1 = 123;
+    component.num2 = -300;
+    component.somar();
+    expect(component.result).toBe(-177); // (result === -176)
   });
 });
