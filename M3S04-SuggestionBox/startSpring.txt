@@ -1,0 +1,1 @@
+https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.3.4&packaging=jar&jvmVersion=21&groupId=com.viesant&artifactId=M3S04-SuggestionBox&name=M3S04-SuggestionBox&description=Project%20for%20FMT&packageName=com.viesant.M3S04-SuggestionBox&dependencies=web,data-jpa,lombok,postgresql
