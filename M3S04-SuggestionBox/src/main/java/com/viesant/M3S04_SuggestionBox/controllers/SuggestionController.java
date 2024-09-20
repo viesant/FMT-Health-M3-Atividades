@@ -4,6 +4,7 @@ import com.viesant.M3S04_SuggestionBox.dto.ReplyRequest;
 import com.viesant.M3S04_SuggestionBox.dto.ReplyResponse;
 import com.viesant.M3S04_SuggestionBox.dto.SuggestionRequest;
 import com.viesant.M3S04_SuggestionBox.dto.SuggestionResponse;
+import com.viesant.M3S04_SuggestionBox.dto.SuggestionWithRepliesResponse;
 import com.viesant.M3S04_SuggestionBox.entities.Suggestion;
 import com.viesant.M3S04_SuggestionBox.services.SuggestionService;
 import java.util.List;
@@ -54,9 +55,9 @@ public class SuggestionController {
   //Read Suggestion by id with replies
   @GetMapping("{id}")
   @ResponseStatus(HttpStatus.OK)
-  public Suggestion findSuggestionByIdWithReplies(@PathVariable Long id){
+  public SuggestionWithRepliesResponse findSuggestionByIdWithReplies(@PathVariable Long id){
     log.info("GET: /suggestions/{} -> Begin", id);
-    Suggestion suggestion = service.findById(id);
+    SuggestionWithRepliesResponse suggestion = service.findById(id);
 
     log.info("GET: /suggestions/{} -> End", id);
     return suggestion;

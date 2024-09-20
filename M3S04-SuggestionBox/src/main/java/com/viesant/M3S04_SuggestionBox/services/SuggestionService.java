@@ -4,6 +4,7 @@ import com.viesant.M3S04_SuggestionBox.dto.ReplyRequest;
 import com.viesant.M3S04_SuggestionBox.dto.ReplyResponse;
 import com.viesant.M3S04_SuggestionBox.dto.SuggestionRequest;
 import com.viesant.M3S04_SuggestionBox.dto.SuggestionResponse;
+import com.viesant.M3S04_SuggestionBox.dto.SuggestionWithRepliesResponse;
 import com.viesant.M3S04_SuggestionBox.entities.Reply;
 import com.viesant.M3S04_SuggestionBox.entities.Suggestion;
 import com.viesant.M3S04_SuggestionBox.exceptions.notfound.SuggestionNotFound;
@@ -38,8 +39,7 @@ public class SuggestionService {
 
   public ReplyResponse createReply(Long id, ReplyRequest replyRequest) {
     log.info("Creating reply to Suggestion with id: {}", id);
-    Suggestion suggestion =
-            suggestionRepository.findById(id).orElseThrow(() -> new SuggestionNotFound(id));
+    Suggestion suggestion = findSuggestionById(id);
 
     Reply reply = new Reply(replyRequest);
     reply.setRepliedAt(LocalDateTime.now());
@@ -68,12 +68,21 @@ public class SuggestionService {
     return suggestions;
   }
 
-  public Suggestion findById(Long id) {
-    log.info("Finding suggestion with id {}", id);
-    Suggestion suggestion =
-        suggestionRepository.findWithRepliesById(id).orElseThrow(() -> new SuggestionNotFound(id));
-    log.info("Suggestion found with id {}", id);
-    return suggestion;
+  public SuggestionWithRepliesResponse findById(Long id) {
+    log.info("Finding suggestion with id {} and replies", id);
+
+    SuggestionWithRepliesResponse response = new SuggestionWithRepliesResponse(findSuggestionById(id));
+
+
+    log.info("Finding replies of suggestion with id:{}", id);
+    response.setReplies( replyRepository.findAllBySuggestionIdOrderByRepliedAtDesc(id).stream().map(
+            (item)-> new ReplyResponse(item, id)
+    ).collect(Collectors.toList())
+    );
+    log.info("{} replies found of suggestion with id:{}",response.getReplies().size(), id);
+
+    log.info("Suggestion found with id {} and replies", id);
+    return response;
   }
 
   // UPDATE
@@ -90,6 +99,21 @@ public class SuggestionService {
 
     log.info("Suggestion saved: {} (id: {})", suggestion.getTitle(), suggestion.getId());
     return new SuggestionResponse(suggestion);
+  }
+
+  private Suggestion findSuggestionById(Long id){
+    log.info("Finding suggestion with id {} (ENTITY)", id);
+
+    Suggestion suggestion =
+            suggestionRepository.findById(id).orElseThrow(() -> new SuggestionNotFound(id));
+
+    log.info("Suggestion found with id {} (ENTITY)", id);
+    return suggestion;
+
+    /*
+    Reminder response = repository.findById(id).orElseThrow(() -> new ReminderNotFound(id));
+    return response;
+     */
   }
 
 }
