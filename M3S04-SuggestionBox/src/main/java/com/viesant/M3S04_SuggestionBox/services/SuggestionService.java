@@ -3,8 +3,10 @@ package com.viesant.M3S04_SuggestionBox.services;
 import com.viesant.M3S04_SuggestionBox.dto.SuggestionRequest;
 import com.viesant.M3S04_SuggestionBox.dto.SuggestionResponse;
 import com.viesant.M3S04_SuggestionBox.entities.Suggestion;
-import com.viesant.M3S04_SuggestionBox.repositories.repositories.SuggestionRepository;
+import com.viesant.M3S04_SuggestionBox.repositories.SuggestionRepository;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,7 @@ public class SuggestionService {
 
     Suggestion suggestion = new Suggestion(request);
     suggestion.setCreatedAt(LocalDateTime.now());
+    suggestion.setUpdatedAt(LocalDateTime.now());
     SuggestionResponse response = save(suggestion);
 
     log.info("Suggestion created: {} (id: {})", response.getTitle(), response.getId());
@@ -28,6 +31,16 @@ public class SuggestionService {
   }
 
   // READ
+  public List<SuggestionResponse> findAll(String title) {
+    log.info("Finding all suggestions with filter({})", title);
+    List<SuggestionResponse> suggestions =
+        repository.findAllByTitleContainingIgnoreCaseOrderByUpdatedAtDesc(title).stream()
+            .map(SuggestionResponse::new)
+            .collect(Collectors.toList());
+
+    log.info("{} suggestions found with filter({})", suggestions.size(), title);
+    return suggestions;
+  }
 
   // UPDATE
 
