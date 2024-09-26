@@ -1,13 +1,12 @@
 package br.com.exemplo.aula.services;
 
-import br.com.exemplo.aula.entities.Paciente;
 import br.com.exemplo.aula.controllers.dto.PacienteRequestDTO;
 import br.com.exemplo.aula.controllers.dto.PacienteResponseDTO;
+import br.com.exemplo.aula.entities.Paciente;
 import br.com.exemplo.aula.repositories.PacienteRepository;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Service;
 
 @Service
 public class PacienteService {
@@ -93,6 +92,6 @@ public class PacienteService {
     public void removerPaciente(Long id) {
         pacienteRepository.deleteById(id);
     }
-    
-    
+
+
 }
