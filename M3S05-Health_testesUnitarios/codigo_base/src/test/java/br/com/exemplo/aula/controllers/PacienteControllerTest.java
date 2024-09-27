@@ -1,11 +1,14 @@
 package br.com.exemplo.aula.controllers;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,7 +37,7 @@ class PacienteControllerTest {
 
   @Autowired MockMvc mvc;
 
-  @MockBean PacienteService pacienteService;
+  @MockBean PacienteService service;
 
   private PacienteResponseDTO paciente1;
   private PacienteResponseDTO paciente2;
@@ -62,11 +65,13 @@ class PacienteControllerTest {
   @Test
   @DisplayName("POST /pacientes - Salva novo paciente")
   void salvarPaciente() throws Exception {
-    when(pacienteService.salvarPaciente(any(PacienteRequestDTO.class))).thenReturn(paciente1);
+    when(service.salvarPaciente(any(PacienteRequestDTO.class))).thenReturn(paciente1);
 
-    mvc.perform(post("/pacientes")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
+    mvc.perform(
+            post("/pacientes")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(
+                    """
                              {
                                  "nome": "texto",
                                  "dataNascimento": "10/10/1010",
@@ -74,14 +79,13 @@ class PacienteControllerTest {
                                  "telefone": "texto",
                                  "email": "texto",
                                  "idEndereco": 1
-                             }""")
-            )
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.id").value(paciente1.getId()))
-            .andExpect(jsonPath("$.nome").value(paciente1.getNome()));
+                             }"""))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.id").value(paciente1.getId()))
+        .andExpect(jsonPath("$.nome").value(paciente1.getNome()));
 
     // Verifica se o serviço foi chamado
-    verify(pacienteService).salvarPaciente(any(PacienteRequestDTO.class));
+    verify(service).salvarPaciente(any(PacienteRequestDTO.class));
   }
 
   @Test
@@ -89,7 +93,7 @@ class PacienteControllerTest {
   void listarPacientes() throws Exception {
     List<PacienteResponseDTO> pacientes = Arrays.asList(paciente1, paciente2);
 
-    when(pacienteService.listarPacientes()).thenReturn(pacientes);
+    when(service.listarPacientes()).thenReturn(pacientes);
 
     mvc.perform(get("/pacientes"))
         .andExpect(status().isOk())
@@ -99,15 +103,54 @@ class PacienteControllerTest {
         .andExpect(jsonPath("$[1].id").value(paciente2.getId()))
         .andExpect(jsonPath("$[1].nome").value(paciente2.getNome()));
 
-    verify(pacienteService).listarPacientes();
+    verify(service).listarPacientes();
   }
 
   @Test
-  void search() {}
+  void search() throws Exception {
+    when(service.buscarPaciente(anyLong())).thenReturn(paciente1);
+
+    mvc.perform(get("/pacientes/1"))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.id").value(paciente1.getId()))
+        .andExpect(jsonPath("$.nome").value(paciente1.getNome()));
+
+    verify(service).buscarPaciente(anyLong());
+  }
 
   @Test
-  void remove() {}
+  @DisplayName("DELETE /pacientes/{id} - Remove paciente")
+  void remove() throws Exception {
+    doNothing().when(service).removerPaciente(anyLong());
 
+    mvc.perform(delete("/pacientes/1"))
+            .andExpect(status().isNoContent());
+
+    // Verifica se o serviço foi chamado corretamente
+    verify(service).removerPaciente(anyLong());
+  }
   @Test
-  void update() {}
+  void update() throws Exception {
+    when(service.atualizarPaciente(anyLong(), any(PacienteRequestDTO.class))).thenReturn(paciente1);
+
+    mvc.perform(
+            put("/pacientes/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(
+                    """
+                             {
+                                 "nome": "texto",
+                                 "dataNascimento": "10/10/1010",
+                                 "cpf": "texto",
+                                 "telefone": "texto",
+                                 "email": "texto",
+                                 "idEndereco": 1
+                             }"""))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.id").value(paciente1.getId()))
+        .andExpect(jsonPath("$.nome").value(paciente1.getNome()));
+
+    // Verifica se os serviços foram chamados
+    verify(service).atualizarPaciente(anyLong(), any(PacienteRequestDTO.class));
+  }
 }
