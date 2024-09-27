@@ -21,9 +21,7 @@ public class PacienteController {
     }
 
     @PostMapping()
-    public PacienteResponseDTO salvarPaciente(@RequestBody PacienteRequestDTO request,
-                                              //@RequestParam("date")
-                                              @DateTimeFormat(pattern = "dd/MM/yyyy") Date date) {
+    public PacienteResponseDTO salvarPaciente(@RequestBody PacienteRequestDTO request) {
         return pacienteService.salvarPaciente(request);
 
 

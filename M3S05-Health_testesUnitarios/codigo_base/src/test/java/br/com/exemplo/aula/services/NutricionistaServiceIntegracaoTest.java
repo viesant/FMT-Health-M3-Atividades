@@ -73,7 +73,7 @@ class NutricionistaServiceIntegracaoTest {
   @DisplayName("Deve salvar um nutricionista e verificar se o método save do repositório foi chamado")
   void salvarNutricionista() {
     NutricionistaRequestDTO requestDTO = new NutricionistaRequestDTO();
-    
+
     when(repository.save(any(Nutricionista.class))).thenReturn(nutricionista1);
 
     NutricionistaResponseDTO response = service.salvarNutricionista(requestDTO);
