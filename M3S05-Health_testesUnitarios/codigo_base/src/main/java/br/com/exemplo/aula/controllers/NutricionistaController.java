@@ -1,13 +1,12 @@
 package br.com.exemplo.aula.controllers;
 
-import br.com.exemplo.aula.services.NutricionistaService;
 import br.com.exemplo.aula.controllers.dto.NutricionistaRequestDTO;
 import br.com.exemplo.aula.controllers.dto.NutricionistaResponseDTO;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
-
+import br.com.exemplo.aula.services.NutricionistaService;
 import java.util.List;
+import org.springframework.http.ResponseEntity;
+//import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/nutricionistas")
@@ -20,7 +19,7 @@ public class NutricionistaController {
         this.nutricionistaService = nutricionistaService;
     }
 
-    @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN','SCOPE_NUTRI')")
+//    @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN','SCOPE_NUTRI')")
 //    @PreAuthorize("hasAuthority('SCOPE_NUTRI')")
     @PostMapping()
     public NutricionistaResponseDTO salvarNutricionista(@RequestBody NutricionistaRequestDTO request) {

@@ -144,13 +144,7 @@ class PacienteServiceTest {
   @DisplayName("Recebe um paciente e salva no repositório")
   void salvarPaciente() {
     PacienteRequestDTO requestDTO =
-        new PacienteRequestDTO(
-            paciente1.getNome(),
-            paciente1.getDataNascimento(),
-            paciente1.getCpf(),
-            paciente1.getTelefone(),
-            paciente1.getEmail(),
-            22L);
+        new PacienteRequestDTO();
 
     when(repository.save(any(Paciente.class))).thenReturn(paciente1);
 
@@ -172,18 +166,13 @@ class PacienteServiceTest {
   @DisplayName("Busca paciente por Id e altera campos")
   void atualizarPaciente() {
     PacienteRequestDTO requestDTO =
-            new PacienteRequestDTO(
-                    paciente1.getNome(),
-                    paciente1.getDataNascimento(),
-                    paciente1.getCpf(),
-                    paciente1.getTelefone(),
-                    paciente1.getEmail(),
-                    22L);
+            new PacienteRequestDTO();
 
     when(repository.findById(anyLong())).thenReturn(Optional.ofNullable(paciente1));
     when(repository.save(any(Paciente.class))).thenReturn(paciente1);
 
     PacienteResponseDTO responseDTO = service.atualizarPaciente(1L, requestDTO);
+
     assertNotNull(responseDTO);
 
     assertEquals(paciente1.getId(), responseDTO.getId());
