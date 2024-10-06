@@ -5,9 +5,9 @@ import br.viesant.m3s06cleancode.Ex1_CodeReview.pack.EstoqueRepository;
 import br.viesant.m3s06cleancode.Ex1_CodeReview.pack.Remedio;
 import br.viesant.m3s06cleancode.Ex1_CodeReview.pack.RemedioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class RemedioService {
   @Autowired private RemedioRepository remedioRepository;
   @Autowired private EstoqueRepository estoqueRepository;
