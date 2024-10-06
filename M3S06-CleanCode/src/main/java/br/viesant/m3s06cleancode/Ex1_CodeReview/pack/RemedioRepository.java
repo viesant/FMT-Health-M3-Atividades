@@ -1,15 +1,27 @@
 package br.viesant.m3s06cleancode.Ex1_CodeReview.pack;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
-@Repository
-public interface RemedioRepository extends JpaRepository<Remedio, Long> {
-  boolean existe(Integer idR);
+@Component
+public class RemedioRepository {
+  public Integer save(Remedio remedio) {
 
-  Remedio getRemedioPorId(Integer idR);
+    return null;
+  }
 
-  Remedio getRemedioPorNome(String nomeR);
+  public boolean existe(Integer idR) {
+    return false;
+  }
 
-  boolean existePorNome(String nomeR);
+  public Remedio getRemedioPorId(Integer idR) {
+    return null;
+  }
+
+  public boolean existePorNome(String nomeR) {
+    return false;
+  }
+
+  public Remedio getRemedioPorNome(String nomeR) {
+    return null;
+  }
 }

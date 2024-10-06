@@ -1,8 +1,12 @@
 package br.viesant.m3s06cleancode.Ex1_CodeReview.pack;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
 
-public interface EstoqueRepository extends JpaRepository<Estoque, Long> {
+@Component
+public class EstoqueRepository {
   public Estoque getEstoqueAtual(Integer idR) {
+    return null;
   }
+
+  public void save(Estoque estoque) {}
 }

@@ -6,14 +6,15 @@ import jakarta.persistence.Entity;
 public class Estoque {
 
 
+  public void setIdRemedio(Integer id) {
+
+  }
+
   public void setQuantidade(Integer quantidade) {
+
   }
 
   public Integer getQuantidade() {
     return null;
-  }
-
-  public void setIdRemedio(Integer id) {
-
   }
 }

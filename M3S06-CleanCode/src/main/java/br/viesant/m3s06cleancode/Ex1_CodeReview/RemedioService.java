@@ -9,13 +9,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RemedioService {
-  @Autowired
-  private RemedioRepository remedioRepository;
-  @Autowired
-  private EstoqueRepository estoqueRepository;
+  @Autowired private RemedioRepository remedioRepository;
+  @Autowired private EstoqueRepository estoqueRepository;
 
   public void saveRemedio(String nome, Integer dosagemEmMg) {
-    //Salvar o remédio quando não encontrarmos
+    // Salvar o remédio quando não encontrarmos
     Remedio remedio = new Remedio();
     remedio.setNome(nome);
     remedio.dosagemMg(dosagemEmMg);
@@ -34,14 +32,14 @@ public class RemedioService {
   }
 
   public void addEstoque(Integer idR, Integer quantidade, String nomeR, Integer remedioDosagemMg) {
-    //Se existe remedio eu adiciono o estoque
+    // Se existe remedio eu adiciono o estoque
     if (remedioRepository.existe(idR)) {
       Remedio r = remedioRepository.getRemedioPorId(idR);
 
       Estoque eAtual = estoqueRepository.getEstoqueAtual(idR);
 
       if (eAtual == null) {
-        //Cria um novo estoque quando não encontrou
+        // Cria um novo estoque quando não encontrou
         Estoque estoque = new Estoque();
         estoque.setIdRemedio(r.getId());
         estoque.setQuantidade(quantidade);
@@ -73,7 +71,6 @@ public class RemedioService {
         estoque.setQuantidade(quantidade);
         estoque.setIdRemedio(r.getId());
 
-
         estoqueRepository.save(estoque);
       } else {
         if (quantidade < 0) {
@@ -84,7 +81,7 @@ public class RemedioService {
         estoqueRepository.save(eAtual);
       }
     } else {
-      //Salvar o remédio quando não encontrarmos
+      // Salvar o remédio quando não encontrarmos
       Remedio r = new Remedio();
       r.setNome(nomeR);
       r.dosagemMg(remedioDosagemMg);
@@ -101,7 +98,7 @@ public class RemedioService {
 
       Integer id = remedioRepository.save(r);
 
-      //Adicionar no estoque novo
+      // Adicionar no estoque novo
       Estoque estoque = new Estoque();
       estoque.setIdRemedio(id);
       estoque.setQuantidade(quantidade);
