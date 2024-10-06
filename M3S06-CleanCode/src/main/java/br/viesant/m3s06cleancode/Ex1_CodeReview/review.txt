@@ -1,0 +1,25 @@
+
+método saveRemedio:
+- tornar private
+- nome atributo dosagemEmMg -> dosagemMg
+- validar dados antes de atribuir
+- remedio.dosagemMg -> remedio.setDosagemMg
+- nome.isEmpty() é irrelevante, nome.trim().isEmpty já valida se é vazio ou só espaços em branco
+- redundância na validação de dosagem
+- utilizar uma exception própria para remedio inválido
+- colocar a validação de nome e dosagem em métodos separados
+
+método addEstoque:
+- melhorar nome atributos. não usar abreviações. idR -> idRemedio, ou simplesmente id, nome, quantidade, dosagemMg
+- utilizar Long para registro de ids
+- utilizar as consultas do spring data JPA (findById, findByNome ou até findByIdOrNome)
+- realizar as consultas ao mesmo tempo para evitar código duplicado
+- utilizar o método saveRemedio
+- alterar a atualização/ criação de estoque pro fim, após verificar se há remedio cadastrado
+-dividir o método em várias reponsabilidades (verificar remedio, salvar remedio, criar/atualizar estoque)
+- nomes variáveis como eAtual, remedio r devem ser evitados
+
+comentários desncessários
+criar métodos para validar para nome, dosagemMg, quantidade
+
+demitir o QA, pois este código não tem como ser aprovado
