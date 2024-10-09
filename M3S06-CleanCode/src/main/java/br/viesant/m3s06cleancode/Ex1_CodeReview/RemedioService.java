@@ -1,9 +1,9 @@
 package br.viesant.m3s06cleancode.Ex1_CodeReview;
 
-import br.viesant.m3s06cleancode.Ex1_CodeReview.pack.Estoque;
-import br.viesant.m3s06cleancode.Ex1_CodeReview.pack.EstoqueRepository;
-import br.viesant.m3s06cleancode.Ex1_CodeReview.pack.Remedio;
-import br.viesant.m3s06cleancode.Ex1_CodeReview.pack.RemedioRepository;
+import br.viesant.m3s06cleancode.shared.Estoque;
+import br.viesant.m3s06cleancode.shared.EstoqueRepository;
+import br.viesant.m3s06cleancode.shared.Remedio;
+import br.viesant.m3s06cleancode.shared.RemedioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

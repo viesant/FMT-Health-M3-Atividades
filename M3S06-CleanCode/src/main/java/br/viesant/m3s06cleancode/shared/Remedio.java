@@ -1,4 +1,4 @@
-package br.viesant.m3s06cleancode.Ex1_CodeReview.pack;
+package br.viesant.m3s06cleancode.shared;
 
 
 public class Remedio {
