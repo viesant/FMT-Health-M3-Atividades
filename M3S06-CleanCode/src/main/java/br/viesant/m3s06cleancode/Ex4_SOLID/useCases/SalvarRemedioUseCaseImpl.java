@@ -9,8 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SalvarRemedioUseCaseImpl implements SalvarRemedioUseCase {
 
-  @Autowired
-  private RemedioRepository remedioRepository;
+  @Autowired private RemedioRepository remedioRepository;
 
   @Override
   public Remedio salvar(String nome, Integer dosagemEmMg) {
