@@ -2,12 +2,10 @@ name: M3S07 Java Install with Maven
 
 on:
   push:
-    branches: [ "M3S07" ]
-
+    branches: ["M3S07"]
 
 jobs:
-  build-dev:
-
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,8 +13,12 @@ jobs:
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
-          distribution: 'temurin'
+          java-version: "21"
+          distribution: "temurin"
           cache: maven
+
+      - name: Change directory to M3S07-Docker
+        run: cd M3S07-Docker
+
       - name: Clean with Maven
         run: mvn clean install
