@@ -1,0 +1,33 @@
+name: m3s07-ex4
+
+services:
+  app:
+    container_name: hello-health
+    image: ricardoviesant/hello-health:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/M3S07
+      - SPRING_DATASOURCE_USERNAME=viesant
+      - SPRING_DATASOURCE_PASSWORD=viesant
+    networks:
+      - postgres-network
+
+  database:
+    container_name: m3s07-postgres
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=viesant
+      - POSTGRES_USER=viesant
+      - POSTGRES_DB=M3S07
+    networks:
+      - postgres-network
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+networks:
+  postgres-network:
+    driver: bridge
+
+volumes:
+  pgdata:
