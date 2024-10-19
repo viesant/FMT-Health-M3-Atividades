@@ -2,7 +2,7 @@ name: M3S07 Java Install with Maven
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
@@ -17,8 +17,7 @@ jobs:
           distribution: "temurin"
           cache: maven
 
-      - name: Change directory to M3S07-Docker
-        run: cd M3S07-Docker
-
-      - name: Clean with Maven
-        run: mvn clean install
+      - name: Clean and Install with Maven M3S07-Docker
+        run: |
+          cd M3S07-Docker
+          mvn clean install
