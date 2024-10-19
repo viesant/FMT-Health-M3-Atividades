@@ -1,5 +1,3 @@
-#funciona em um repositorio separado, como esta pasta possui outras atividades, o actions não faz nada
-
 name: M3S07 Java Install with Maven
 
 on:
