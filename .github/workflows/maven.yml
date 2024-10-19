@@ -1,8 +1,10 @@
+#funciona em um repositorio separado, como esta pasta possui outras atividades, o actions não faz nada
+
 name: M3S07 Java Install with Maven
 
 on:
   push:
-    branches: [ "M3S07" ]
+    branches: [ "main" ]
 
 
 jobs:
